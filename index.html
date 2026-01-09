@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Word Counter Tool | Count Words & Characters | WordCounterPro</title>
+    <meta name="description" content="Free online word counter tool. Count words, characters, sentences, and paragraphs instantly. Perfect for writers, students, and professionals.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google tag (gtag.js) - Add later when you get GA4 ID -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-calculator"></i> WordCounterPro</h1>
+            <p class="tagline">Free online tool to count words, characters, and more</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tool-container">
+            <!-- Text Input Area -->
+            <div class="input-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-keyboard"></i> Enter Your Text</h2>
+                    <button id="clear-btn" class="btn-secondary">
+                        <i class="fas fa-broom"></i> Clear All
+                    </button>
+                </div>
+                <textarea id="text-input" placeholder="Start typing or paste your text here..." autofocus></textarea>
+                <div class="text-actions">
+                    <button id="paste-btn" class="btn-small">
+                        <i class="fas fa-paste"></i> Paste Text
+                    </button>
+                    <button id="sample-btn" class="btn-small">
+                        <i class="fas fa-file-alt"></i> Load Sample
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Display -->
+            <div class="stats-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-bar"></i> Text Statistics</h2>
+                    <span class="update-info">Updates in real-time</span>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-icon"><i class="fas fa-font"></i></div>
+                        <div class="stat-content">
+                            <h3>Words</h3>
+                            <p id="word-count" class="stat-number">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-text-width"></i></div>
+                        <div class="stat-content">
+                            <h3>Characters</h3>
+                            <p id="char-count" class="stat-number">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-text-height"></i></div>
+                        <div class="stat-content">
+                            <h3>Characters (no spaces)</h3>
+                            <p id="char-no-spaces-count" class="stat-number">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-paragraph"></i></div>
+                        <div class="stat-content">
+                            <h3>Sentences</h3>
+                            <p id="sentence-count" class="stat-number">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-align-left"></i></div>
+                        <div class="stat-content">
+                            <h3>Paragraphs</h3>
+                            <p id="paragraph-count" class="stat-number">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="far fa-clock"></i></div>
+                        <div class="stat-content">
+                            <h3>Reading Time</h3>
+                            <p id="reading-time" class="stat-number">0 min</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Stats -->
+                <div class="additional-stats">
+                    <h3><i class="fas fa-info-circle"></i> Additional Information</h3>
+                    <div class="stats-details">
+                        <div class="stat-item">
+                            <span class="stat-label">Longest Word:</span>
+                            <span id="longest-word" class="stat-value">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Most Used Word:</span>
+                            <span id="common-word" class="stat-value">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Word Density:</span>
+                            <span id="word-density" class="stat-value">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Media Counters -->
+            <div class="social-section">
+                <h2><i class="fas fa-share-alt"></i> Social Media Limits</h2>
+                <div class="social-counters">
+                    <div class="social-card twitter">
+                        <div class="social-icon"><i class="fab fa-twitter"></i></div>
+                        <div class="social-info">
+                            <h3>Twitter</h3>
+                            <p class="social-limit">280 characters</p>
+                            <div class="progress-bar">
+                                <div id="twitter-progress" class="progress-fill"></div>
+                            </div>
+                            <p id="twitter-count" class="social-count">0/280</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-card facebook">
+                        <div class="social-icon"><i class="fab fa-facebook"></i></div>
+                        <div class="social-info">
+                            <h3>Facebook</h3>
+                            <p class="social-limit">63,206 characters</p>
+                            <div class="progress-bar">
+                                <div id="facebook-progress" class="progress-fill"></div>
+                            </div>
+                            <p id="facebook-count" class="social-count">0/63,206</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-card instagram">
+                        <div class="social-icon"><i class="fab fa-instagram"></i></div>
+                        <div class="social-info">
+                            <h3>Instagram</h3>
+                            <p class="social-limit">2,200 characters</p>
+                            <div class="progress-bar">
+                                <div id="instagram-progress" class="progress-fill"></div>
+                            </div>
+                            <p id="instagram-count" class="social-count">0/2,200</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features-section">
+            <h2><i class="fas fa-star"></i> Why Use WordCounterPro?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Real-Time Counting</h3>
+                    <p>See results as you type with instant updates.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Friendly</h3>
+                    <p>Works perfectly on all devices and screen sizes.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-lock"></i>
+                    <h3>Privacy Focused</h3>
+                    <p>Your text never leaves your browser. 100% secure.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-rocket"></i>
+                    <h3>No Limits</h3>
+                    <p>Count unlimited text completely free, no registration.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© <span id="current-year">2024</span> WordCounterPro. A free tool for writers, students, and professionals.</p>
+            <p class="footer-note">This tool works entirely in your browser - your text is never saved or sent to any server.</p>
+            <p class="footer-links">
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a> | 
+                <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a> | 
+                <a href="#"><i class="fas fa-file-contract"></i> Terms</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
