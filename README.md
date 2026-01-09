@@ -1,1 +1,1 @@
-# wordcounterpro
+# FreeWordCounter
