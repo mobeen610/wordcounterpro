@@ -46,14 +46,10 @@ header {
     margin-top: 10px;
 }
 
+/* JUST CHANGE TEXT COLOR TO BLACK */
 .main-nav a {
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 15px;
-    background: #f0f0f0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    color: black !important;
+    font-weight: bold !important;
 }
 
 .main-nav a:hover {
