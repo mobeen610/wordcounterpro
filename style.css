@@ -25,7 +25,14 @@ body {
   z-index: 1;
   min-width: 200px;
 }
-
+.sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
 .dropdown-content a {
   display: block;
   padding: 10px;
