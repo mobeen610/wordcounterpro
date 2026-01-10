@@ -16,7 +16,92 @@ body {
   position: relative;
   display: inline-block;
 }
+/* ===== FIXED HEADER STYLES ===== */
+.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 15px 0;
+}
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-top {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.header-top h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    color: #2c3e50;
+}
+
+.header-top .tagline {
+    margin: 5px 0;
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+/* ===== NAVIGATION ===== */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #34495e;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.main-nav a:hover {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+
+/* ===== PUSH BODY CONTENT DOWN ===== */
+body {
+    margin: 0;
+    padding-top: 180px; /* Adjust if header is taller/shorter */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .header-top h1 {
+        font-size: 1.8rem;
+    }
+    
+    .main-nav {
+        gap: 10px;
+    }
+    
+    .main-nav a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    body {
+        padding-top: 160px;
+    }
+}
 .dropdown-content {
   display: none;
   position: absolute;
