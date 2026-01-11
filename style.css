@@ -18,27 +18,62 @@ body {
     padding: 0 20px;
 }
 
-/* ===== COLORFUL HEADER TOP ===== */
+/* ===== CLEAN SIMPLE HEADER ===== */
 .header-top {
-    background: linear-gradient(135deg, #3498db, #1abc9c) !important;
-    padding: 20px !important;
-    border-radius: 10px !important;
-    margin-bottom: 15px !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    text-align: center !important;
+    padding: 20px 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
 }
 
 .header-top h1 {
-    color: white !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2) !important;
-    margin: 0 !important;
+    color: #1a73e8 !important; /* Blue like your image */
+    font-size: 2.5rem !important;
+    margin-bottom: 10px !important;
 }
 
 .header-top .tagline {
-    color: #f8f9fa !important;
-    font-size: 1.1rem !important;
-    margin-top: 5px !important;
+    color: #5f6368 !important; /* Gray like your image */
+    font-size: 1.2rem !important;
 }
-/* Main Content */
+
+/* Horizontal line below header */
+hr {
+    width: 80% !important;
+    margin: 20px auto !important;
+    border: 1px solid #eee !important;
+}
+    /* ===== CENTER CONTENT ===== */
+textarea {
+    display: block !important;
+    margin: 20px auto !important;
+    width: 80% !important;
+    max-width: 800px !important;
+    padding: 15px !important;
+    font-size: 1rem !important;
+    border: 2px solid #ddd !important;
+    border-radius: 8px !important;
+}
+
+button {
+    display: block !important;
+    margin: 20px auto !important;
+    padding: 12px 30px !important;
+    background: #1a73e8 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+}
+
+button:hover {
+    background: #0d62d9 !important;
+}
+    
+    
+    /* Main Content */
 main {
     padding: 2rem 0;
 }
