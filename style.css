@@ -47,7 +47,29 @@ main {
     padding: 2rem 0;
 }
 
+/* ===== BLOG HEADER FIX ===== */
+.blog .header-top,
+.blog-page .header-top,
+.blog-index .header-top {
+    background: linear-gradient(135deg, #3498db, #1abc9c) !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    margin-bottom: 15px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
 
+.blog .header-top h1,
+.blog-page .header-top h1,
+.blog-index .header-top h1 {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2) !important;
+}
+
+.blog .header-top .tagline,
+.blog-page .header-top .tagline,
+.blog-index .header-top .tagline {
+    color: #f8f9fa !important;
+}
 
 
     
