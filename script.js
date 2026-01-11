@@ -10,6 +10,41 @@ const longestWordEl = document.getElementById('longest-word');
 const commonWordEl = document.getElementById('common-word');
 const wordDensityEl = document.getElementById('word-density');
 
+
+// Visitor Counter Function
+function updateVisitorCounter() {
+    // Base count (you can set your starting number)
+    let baseCount = 1234;
+    
+    // Try to get existing count from localStorage
+    let storedCount = localStorage.getItem('wordCounterVisitors');
+    
+    if (storedCount) {
+        // Use stored count
+        document.getElementById('visitorCount').textContent = 
+            parseInt(storedCount).toLocaleString();
+    } else {
+        // First visitor - set base count
+        localStorage.setItem('wordCounterVisitors', baseCount);
+        document.getElementById('visitorCount').textContent = 
+            baseCount.toLocaleString();
+    }
+    
+    // Increment count for this session if first visit
+    if (!sessionStorage.getItem('hasVisited')) {
+        let currentCount = parseInt(localStorage.getItem('wordCounterVisitors'));
+        currentCount += 1;
+        localStorage.setItem('wordCounterVisitors', currentCount);
+        sessionStorage.setItem('hasVisited', 'true');
+        
+        // Update display
+        document.getElementById('visitorCount').textContent = 
+            currentCount.toLocaleString();
+    }
+}
+
+// Call when page loads
+window.addEventListener('DOMContentLoaded', updateVisitorCounter);
 // Social Media Elements
 const twitterProgress = document.getElementById('twitter-progress');
 const twitterCountEl = document.getElementById('twitter-count');
