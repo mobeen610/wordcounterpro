@@ -80,11 +80,7 @@ main {
 .input-section {
     margin-bottom: 2.5rem;
 }
-}
-/* MAKE ONLY NAVIGATION LINKS WHITE */
-nav.main-nav a {
-    color: white !important;
-}
+
 #text-input {
     width: 100%;
     min-height: 200px;
