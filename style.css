@@ -48,11 +48,7 @@ main {
 }
 
 
-/* ===== NAVIGATION TEXT WHITE & BOLD ===== */
-nav.main-nav a {
-    color: white !important;
-    font-weight: bold !important;
-}
+
 
     
 /* Tool Container */
@@ -460,3 +456,9 @@ footer p {
         padding: 1.5rem;
     }
 }
+/* ===== NAVIGATION TEXT WHITE & BOLD ===== */
+nav.main-nav a {
+    color: white !important;
+    font-weight: bold !important;
+}
+    
