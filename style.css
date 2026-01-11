@@ -19,25 +19,23 @@ body {
     padding: 0 20px;
 }
 
-/* ===== COLORFUL HEADER TOP ===== */
+/* ===== GRADIENT HEADER ===== */
 .header-top {
-    background: linear-gradient(135deg, #3498db, #1abc9c) !important;
-    padding: 20px !important;
-    border-radius: 10px !important;
-    margin-bottom: 15px !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    background: linear-gradient(to right, #3498db, #2ecc71) !important;
+    padding: 25px !important;
+    text-align: center !important;
+    border-radius: 0 0 15px 15px !important;
 }
 
 .header-top h1 {
     color: white !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2) !important;
-    margin: 0 !important;
+    font-size: 2.5rem !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
 }
 
 .header-top .tagline {
-    color: #f8f9fa !important;
-    font-size: 1.1rem !important;
-    margin-top: 5px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.2rem !important;
 }
 
 /* Main Content */
