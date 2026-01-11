@@ -47,6 +47,14 @@ main {
     padding: 2rem 0;
 }
 
+
+/* ===== NAVIGATION TEXT WHITE & BOLD ===== */
+nav.main-nav a {
+    color: white !important;
+    font-weight: bold !important;
+}
+
+    
 /* Tool Container */
 .tool-container {
     background: white;
