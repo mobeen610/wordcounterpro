@@ -19,28 +19,25 @@ body {
     padding: 0 20px;
 }
 
-/* Header */
-header {
-    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
-    color: white;
-    padding: 2rem 0;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/* ===== COLORFUL HEADER TOP ===== */
+.header-top {
+    background: linear-gradient(135deg, #3498db, #1abc9c) !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    margin-bottom: 15px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+.header-top h1 {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2) !important;
+    margin: 0 !important;
 }
 
-.tagline {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    font-weight: 300;
+.header-top .tagline {
+    color: #f8f9fa !important;
+    font-size: 1.1rem !important;
+    margin-top: 5px !important;
 }
 
 /* Main Content */
