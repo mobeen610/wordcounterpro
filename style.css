@@ -456,9 +456,20 @@ footer p {
         padding: 1.5rem;
     }
 }
-/* ===== NAVIGATION TEXT WHITE & BOLD ===== */
+/* BUTTON-STYLE NAVIGATION */
 nav.main-nav a {
     color: white !important;
     font-weight: bold !important;
+    text-decoration: none !important; /* Removes underline */
+    background-color: #1a73e8 !important; /* Blue button */
+    padding: 10px 20px !important;
+    border-radius: 6px !important;
+    display: inline-block !important;
+    margin: 0 5px !important;
+    border: 2px solid #0d62d9 !important;
+}
+
+nav.main-nav a:hover {
+    background-color: #0d62d9 !important;
 }
     
