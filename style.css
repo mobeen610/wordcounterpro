@@ -17,66 +17,30 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
-
-/* ===== CLEAN SIMPLE HEADER ===== */
-.header-top {
-    text-align: center !important;
-    padding: 20px 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
+/* Header */
+header {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.header-top h1 {
-    color: #1a73e8 !important; /* Blue like your image */
-    font-size: 2.5rem !important;
-    margin-bottom: 10px !important;
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-.header-top .tagline {
-    color: #5f6368 !important; /* Gray like your image */
-    font-size: 1.2rem !important;
+.tagline {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
 }
 
-/* Horizontal line below header */
-hr {
-    width: 80% !important;
-    margin: 20px auto !important;
-    border: 1px solid #eee !important;
-}
-    /* ===== CENTER CONTENT ===== */
-textarea {
-    display: block !important;
-    margin: 20px auto !important;
-    width: 80% !important;
-    max-width: 800px !important;
-    padding: 15px !important;
-    font-size: 1rem !important;
-    border: 2px solid #ddd !important;
-    border-radius: 8px !important;
-}
-
-button {
-    display: block !important;
-    margin: 20px auto !important;
-    padding: 12px 30px !important;
-    background: #1a73e8 !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 8px !important;
-    font-size: 1rem !important;
-    cursor: pointer !important;
-}
-
-button:hover {
-    background: #0d62d9 !important;
-}
-    /* ===== CENTER SECTION HEADINGS ===== */
-h2 {
-    text-align: center !important;
-    color: #333 !important;
-    margin: 30px 0 20px 0 !important;
-}
     
     /* Main Content */
 main {
