@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy Text Generator - WordCounterPro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* FANCY TEXT PAGE STYLES */
+        .fancy-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        #fancyInput {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.2rem;
+            border: 3px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        #fancyInput:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+            outline: none;
+        }
+        
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .style-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #1a73e8;
+            transition: transform 0.3s;
+        }
+        
+        .style-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .style-card h3 {
+            color: #1a73e8;
+            margin-top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .style-output {
+            font-size: 1.5rem;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin: 15px 0;
+            min-height: 60px;
+            border: 2px dashed #ddd;
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #0d62d9;
+        }
+        
+        .copy-btn i {
+            font-size: 0.9rem;
+        }
+        
+        .preview-title {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1a73e8, #34a853);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #ddd;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="container">
+            <div class="header-top">
+                <h1><i class="fas fa-magic"></i> Fancy Text Generator</h1>
+                <p class="tagline">Create stylish text for social media bios, posts, and more</p>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="blog/">Blog</a>
+                <div class="dropdown">
+                    <a href="#">Text Tools ▼</a>
+                    <div class="dropdown-content">
+                        <a href="fancy-text.html">🎭 Fancy Text</a>
+                        <a href="reverse-text.html">↻ Reverse Text</a>
+                        <a href="aesthetic-text.html">🌸 Aesthetic Text</a>
+                        <a href="fonts.html">🔤 Cool Fonts</a>
+                        <a href="small-text.html">🔠 Small Text</a>
+                    </div>
+                </div>
+                <a href="privacy-policy.html">Privacy Policy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 180px;">
+        <div class="fancy-container">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h2>Enter Your Text</h2>
+                <input type="text" id="fancyInput" placeholder="Type your text here..." value="Hello World!">
+                
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="generateAllStyles()">
+                        <i class="fas fa-wand-magic-sparkles"></i> Generate All Styles
+                    </button>
+                    <button class="btn-secondary" onclick="document.getElementById('fancyInput').value = ''">
+                        <i class="fas fa-eraser"></i> Clear
+                    </button>
+                    <button class="btn-secondary" onclick="document.getElementById('fancyInput').value = 'Hello World! Welcome to Fancy Text Generator!'">
+                        <i class="fas fa-star"></i> Example
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Styles Grid -->
+            <h2>Fancy Text Styles</h2>
+            <p>Click "Copy" to use any style on social media</p>
+            
+            <div class="style-grid" id="stylesGrid">
+                <!-- Styles will be generated here -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Fancy Text Styles Database
+        const textStyles = [
+            {
+                name: "Bubble Text",
+                transform: (text) => text.split('').map(char => {
+                    const code = char.charCodeAt(0);
+                    if (code >= 65 && code <= 90) return String.fromCharCode(code + 9275);
+                    if (code >= 97 && code <= 122) return String.fromCharCode(code + 9307);
+                    return char;
+                }).join(''),
+                example: "Ⓗⓔⓛⓛⓞ Ⓦⓞⓡⓛⓓ!"
+            },
+            {
+                name: "Small Caps",
+                transform: (text) => text.split('').map(char => {
+                    const smallCaps = {
+                        'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ',
+                        'f': 'ꜰ', 'g': 'ɢ', 'h': 'ʜ', 'i': 'ɪ', 'j': 'ᴊ',
+                        'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ', 'o': 'ᴏ',
+                        'p': 'ᴘ', 'q': 'ǫ', 'r': 'ʀ', 's': 'ꜱ', 't': 'ᴛ',
+                        'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 'y': 'ʏ',
+                        'z': 'ᴢ', 'A': 'ᴀ', 'B': 'ʙ', 'C': 'ᴄ', 'D': 'ᴅ',
+                        'E': 'ᴇ', 'F': 'ꜰ', 'G': 'ɢ', 'H': 'ʜ', 'I': 'ɪ',
+                        'J': 'ᴊ', 'K': 'ᴋ', 'L': 'ʟ', 'M': 'ᴍ', 'N': 'ɴ',
+                        'O': 'ᴏ', 'P': 'ᴘ', 'Q': 'ǫ', 'R': 'ʀ', 'S': 'ꜱ',
+                        'T': 'ᴛ', 'U': 'ᴜ', 'V': 'ᴠ', 'W': 'ᴡ', 'X': 'x',
+                        'Y': 'ʏ', 'Z': 'ᴢ'
+                    };
+                    return smallCaps[char] || char;
+                }).join(''),
+                example: "ʜᴇʟʟᴏ ᴡᴏʀʟᴅ!"
+            },
+            {
+                name: "Double Struck",
+                transform: (text) => text.split('').map(char => {
+                    const doubleStruck = {
+                        'A': '𝔸', 'B': '𝔹', 'C': 'ℂ', 'D': '𝔻', 'E': '𝔼',
+                        'F': '𝔽', 'G': '𝔾', 'H': 'ℍ', 'I': '𝕀', 'J': '𝕁',
+                        'K': '𝕂', 'L': '𝕃', 'M': '𝕄', 'N': 'ℕ', 'O': '𝕆',
+                        'P': 'ℙ', 'Q': 'ℚ', 'R': 'ℝ', 'S': '𝕊', 'T': '𝕋',
+                        'U': '𝕌', 'V': '𝕍', 'W': '𝕎', 'X': '𝕏', 'Y': '𝕐',
+                        'Z': 'ℤ', 'a': '𝕒', 'b': '𝕓', 'c': '𝕔', 'd': '𝕕',
+                        'e': '𝕖', 'f': '𝕗', 'g': '𝕘', 'h': '𝕙', 'i': '𝕚',
+                        'j': '𝕛', 'k': '𝕜', 'l': '𝕝', 'm': '𝕞', 'n': '𝕟',
+                        'o': '𝕠', 'p': '𝕡', 'q': '𝕢', 'r': '𝕣', 's': '𝕤',
+                        't': '𝕥', 'u': '𝕦', 'v': '𝕧', 'w': '𝕨', 'x': '𝕩',
+                        'y': '𝕪', 'z': '𝕫'
+                    };
+                    return doubleStruck[char] || char;
+                }).join(''),
+                example: "ℍ𝕖𝕝𝕝𝕠 𝕎𝕠𝕣𝕝𝕕!"
+            },
+            {
+                name: "Cursive",
+                transform: (text) => text.split('').map(char => {
+                    const cursive = {
+                        'A': '𝒜', 'B': '𝐵', 'C': '𝒞', 'D': '𝒟', 'E': '𝐸',
+                        'F': '𝐹', 'G': '𝒢', 'H': '𝐻', 'I': '𝐼', 'J': '𝒥',
+                        'K': '𝒦', 'L': '𝐿', 'M': '𝑀', 'N': '𝒩', 'O': '𝒪',
+                        'P': '𝒫', 'Q': '𝒬', 'R': '𝑅', 'S': '𝒮', 'T': '𝒯',
+                        'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳', 'Y': '𝒴',
+                        'Z': '𝒵', 'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹',
+                        'e': '𝑒', 'f': '𝒻', 'g': '𝑔', 'h': '𝒽', 'i': '𝒾',
+                        'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃',
+                        'o': '𝑜', 'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈',
+                        't': '𝓉', 'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍',
+                        'y': '𝓎', 'z': '𝓏'
+                    };
+                    return cursive[char] || char;
+                }).join(''),
+                example: "𝒞𝓊𝓇𝓈𝒾𝓋ℯ 𝒯ℯ𝓍𝓉"
+            },
+            {
+                name: "Gothic",
+                transform: (text) => text.split('').map(char => {
+                    const gothic = {
+                        'A': '𝔄', 'B': '𝔅', 'C': 'ℭ', 'D': '𝔇', 'E': '𝔈',
+                        'F': '𝔉', 'G': '𝔊', 'H': 'ℌ', 'I': 'ℑ', 'J': '𝔍',
+                        'K': '𝔎', 'L': '𝔏', 'M': '𝔐', 'N': '𝔑', 'O': '𝔒',
+                        'P': '𝔓', 'Q': '𝔔', 'R': 'ℜ', 'S': '𝔖', 'T': '𝔗',
+                        'U': '𝔘', 'V': '𝔙', 'W': '𝔚', 'X': '𝔛', 'Y': '𝔜',
+                        'Z': 'ℨ', 'a': '𝔞', 'b': '𝔟', 'c': '𝔠', 'd': '𝔡',
+                        'e': '𝔢', 'f': '𝔣', 'g': '𝔤', 'h': '𝔥', 'i': '𝔦',
+                        'j': '𝔧', 'k': '𝔨', 'l': '𝔩', 'm': '𝔪', 'n': '𝔫',
+                        'o': '𝔬', 'p': '𝔭', 'q': '𝔮', 'r': '𝔯', 's': '𝔰',
+                        't': '𝔱', 'u': '𝔲', 'v': '𝔳', 'w': '𝔴', 'x': '𝔵',
+                        'y': '𝔶', 'z': '𝔷'
+                    };
+                    return gothic[char] || char;
+                }).join(''),
+                example: "𝔊𝔬𝔱𝔥𝔦𝔠 𝔗𝔢𝔵𝔱"
+            },
+            {
+                name: "Monospace",
+                transform: (text) => text.split('').map(char => {
+                    const monospace = {
+                        'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴',
+                        'F': '𝙵', 'G': '𝙶', 'H': '𝙷', 'I': '𝙸', 'J': '𝙹',
+                        'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽', 'O': '𝙾',
+                        'P': '𝙿', 'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃',
+                        'U': '𝚄', 'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 'Y': '𝚈',
+                        'Z': '𝚉', 'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍',
+                        'e': '𝚎', 'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 'i': '𝚒',
+                        'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗',
+                        'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜',
+                        't': '𝚝', 'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡',
+                        'y': '𝚢', 'z': '𝚣'
+                    };
+                    return monospace[char] || char;
+                }).join(''),
+                example: "𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎 𝚃𝚎𝚡𝚝"
+            },
+            {
+                name: "Slashed",
+                transform: (text) => text.split('').map(char => {
+                    const slashed = {
+                        'A': 'Ⱥ', 'B': 'Ƀ', 'C': 'Ȼ', 'D': 'Đ', 'E': 'Ɇ',
+                        'F': 'F', 'G': 'Ǥ', 'H': 'Ħ', 'I': 'Ɨ', 'J': 'Ɉ',
+                        'K': 'Ꝁ', 'L': 'Ł', 'M': 'M', 'N': 'N', 'O': 'Ø',
+                        'P': 'Ᵽ', 'Q': 'Ꝗ', 'R': 'Ɍ', 'S': 'S', 'T': 'Ŧ',
+                        'U': 'ᵾ', 'V': 'V', 'W': 'W', 'X': 'X', 'Y': 'Ɏ',
+                        'Z': 'Ƶ', 'a': 'ⱥ', 'b': 'ƀ', 'c': 'ȼ', 'd': 'đ',
+                        'e': 'ɇ', 'f': 'ƒ', 'g': 'ǥ', 'h': 'ħ', 'i': 'ɨ',
+                        'j': 'ɉ', 'k': 'ꝁ', 'l': 'ł', 'm': 'ɱ', 'n': 'ᵰ',
+                        'o': 'ø', 'p': 'ᵽ', 'q': 'ꝗ', 'r': 'ɍ', 's': 'ʂ',
+                        't': 'ŧ', 'u': 'ʉ', 'v': 'ʋ', 'w': 'ⱳ', 'x': 'ᶍ',
+                        'y': 'ẏ', 'z': 'ƶ'
+                    };
+                    return slashed[char] || char;
+                }).join(''),
+                example: "ȺɃȻĐɆɆ"
+            },
+            {
+                name: "Mirror Text",
+                transform: (text) => text.split('').map(char => {
+                    const mirror = {
+                        'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ',
+                        'f': 'ɟ', 'g': 'ƃ', 'h': 'ɥ', 'i': 'ᴉ', 'j': 'ɾ',
+                        'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u', 'o': 'o',
+                        'p': 'd', 'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ',
+                        'u': 'n', 'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 'y': 'ʎ',
+                        'z': 'z', 'A': '∀', 'B': 'q', 'C': 'Ɔ', 'D': 'p',
+                        'E': 'Ǝ', 'F': 'Ⅎ', 'G': 'פ', 'H': 'H', 'I': 'I',
+                        'J': 'ſ', 'K': 'ʞ', 'L': '˥', 'M': 'W', 'N': 'N',
+                        'O': 'O', 'P': 'Ԁ', 'Q': 'Q', 'R': 'ɹ', 'S': 'S',
+                        'T': '┴', 'U': '∩', 'V': 'Λ', 'W': 'M', 'X': 'X',
+                        'Y': '⅄', 'Z': 'Z'
+                    };
+                    return mirror[char] || char;
+                }).join('').split('').reverse().join(''),
+                example: "pꞁɹoM ʇxǝ⊥"
+            }
+        ];
+
+        // Initialize the page
+        function initializePage() {
+            generateAllStyles();
+            document.getElementById('fancyInput').addEventListener('input', generateAllStyles);
+        }
+
+        // Generate all fancy text styles
+        function generateAllStyles() {
+            const inputText = document.getElementById('fancyInput').value || "Hello World!";
+            const stylesGrid = document.getElementById('stylesGrid');
+            
+            stylesGrid.innerHTML = '';
+            
+            textStyles.forEach((style, index) => {
+                const transformedText = style.transform(inputText);
+                
+                const styleCard = document.createElement('div');
+                styleCard.className = 'style-card';
+                styleCard.innerHTML = `
+                    <h3>
+                        ${style.name}
+                        <span class="preview-title">Preview</span>
+                    </h3>
+                    <div class="style-output" id="styleOutput${index}">
+                        ${transformedText || style.example}
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('styleOutput${index}')">
+                        <i class="far fa-copy"></i> Copy Text
+                    </button>
+                `;
+                
+                stylesGrid.appendChild(styleCard);
+            });
+        }
+
+        // Copy text to clipboard
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            }).catch(err => {
+                console.error('Copy failed:', err);
+            });
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+</html>
