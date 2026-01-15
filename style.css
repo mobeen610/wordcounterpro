@@ -143,6 +143,50 @@ main {
     background: #5a6268;
 }
 
+/* ===== DROPDOWN STYLES ===== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 8px;
+    padding: 10px 0;
+    right: 0;
+    top: 100%;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-content a:hover {
+    background: #1a73e8;
+    color: white;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+
+
+
+    
 /* Stats Grid */
 .stats-grid {
     display: grid;
