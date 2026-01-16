@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Text Generator - WordCounterPro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* AESTHETIC TEXT PAGE STYLES */
+        :root {
+            --vsco-pink: #ffb6c1;
+            --cottagecore-green: #98fb98;
+            --vaporwave-purple: #9370db;
+            --soft-aesthetic: #f8c8dc;
+            --dark-academia: #8b4513;
+        }
+        
+        .aesthetic-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .aesthetic-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8c8dc, #98fb98);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .aesthetic-header::before {
+            content: "🌸 ✨ 🌿";
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+        
+        .aesthetic-header::after {
+            content: "♡ ☁️ ☆";
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+        
+        .input-section {
+            background: #f9f7f7;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border: 2px dashed #e0d6d6;
+        }
+        
+        #aestheticInput {
+            width: 100%;
+            padding: 25px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 12px;
+            background: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-bottom: 20px;
+            resize: vertical;
+            min-height: 120px;
+            transition: all 0.3s;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        #aestheticInput:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(248, 200, 220, 0.5), inset 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .theme-selector {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+            justify-content: center;
+        }
+        
+        .theme-btn {
+            padding: 12px 25px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .theme-btn.active {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .theme-vsco { border-color: var(--vsco-pink); color: #d87093; }
+        .theme-vsco.active { background: var(--vsco-pink); color: white; }
+        
+        .theme-cottagecore { border-color: var(--cottagecore-green); color: #2e8b57; }
+        .theme-cottagecore.active { background: var(--cottagecore-green); color: white; }
+        
+        .theme-vaporwave { border-color: var(--vaporwave-purple); color: #6a5acd; }
+        .theme-vaporwave.active { background: var(--vaporwave-purple); color: white; }
+        
+        .theme-soft { border-color: var(--soft-aesthetic); color: #d87093; }
+        .theme-soft.active { background: var(--soft-aesthetic); color: white; }
+        
+        .theme-dark { border-color: var(--dark-academia); color: #8b4513; }
+        .theme-dark.active { background: var(--dark-academia); color: white; }
+        
+        .aesthetic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .style-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .style-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .style-card.vsco { border-top: 5px solid var(--vsco-pink); }
+        .style-card.cottagecore { border-top: 5px solid var(--cottagecore-green); }
+        .style-card.vaporwave { border-top: 5px solid var(--vaporwave-purple); }
+        .style-card.soft { border-top: 5px solid var(--soft-aesthetic); }
+        .style-card.dark { border-top: 5px solid var(--dark-academia); }
+        
+        .style-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .style-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .style-icon {
+            font-size: 1.5rem;
+        }
+        
+        .aesthetic-output {
+            font-size: 1.8rem;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin: 15px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+        
+        .copy-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ffb6c1, #98fb98);
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .btn-aesthetic {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ffb6c1, #9370db);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            border-color: #ffb6c1;
+            color: #d87093;
+        }
+        
+        .aesthetic-showcase {
+            background: linear-gradient(135deg, #f8f4ff, #fff4f8);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 50px 0;
+            text-align: center;
+            border: 2px dashed #e0d6d6;
+        }
+        
+        .showcase-text {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin: 20px 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .social-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .social-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .social-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .social-card.instagram { border-top: 5px solid #E4405F; }
+        .social-card.tiktok { border-top: 5px solid #000000; }
+        .social-card.twitter { border-top: 5px solid #1DA1F2; }
+        
+        .usage-tips {
+            background: #f9f7f7;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 40px 0;
+            border-left: 5px solid #ffb6c1;
+        }
+        
+        .usage-tips h3 {
+            color: #d87093;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .tip-icon {
+            color: #98fb98;
+            font-size: 1.5rem;
+        }
+        
+        /* Decorative elements */
+        .floating-emoji {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100vw, 100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative floating emojis -->
+    <div class="floating-emoji" style="top: 10%; left: 5%;">🌸</div>
+    <div class="floating-emoji" style="top: 20%; right: 10%;">✨</div>
+    <div class="floating-emoji" style="bottom: 30%; left: 15%;">🌿</div>
+    <div class="floating-emoji" style="bottom: 20%; right: 5%;">☁️</div>
+    <div class="floating-emoji" style="top: 40%; left: 20%;">♡</div>
+    
+    <header class="sticky-header">
+        <div class="container">
+            <div class="header-top">
+                <h1><i class="fas fa-sparkles"></i> Aesthetic Text Generator</h1>
+                <p class="tagline">Create beautiful VSCO, cottagecore, and aesthetic text styles</p>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="blog/">Blog</a>
+                <div class="dropdown">
+                    <a href="#">Text Tools ▼</a>
+                    <div class="dropdown-content">
+                        <a href="fancy-text.html">🎭 Fancy Text</a>
+                        <a href="reverse-text.html">↻ Reverse Text</a>
+                        <a href="aesthetic-text.html" style="background: #ffb6c1; color: #333;">🌸 Aesthetic Text</a>
+                        <a href="fonts.html">🔤 Cool Fonts</a>
+                        <a href="small-text.html">🔠 Small Text</a>
+                    </div>
+                </div>
+                <a href="privacy-policy.html">Privacy Policy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 180px;">
+        <div class="aesthetic-container">
+            <!-- Header -->
+            <div class="aesthetic-header">
+                <h2 style="color: #d87093; margin-bottom: 10px;">Create Beautiful Text ✨</h2>
+                <p style="color: #666; max-width: 600px; margin: 0 auto;">
+                    Generate aesthetic text styles for Instagram bios, TikTok captions, VSCO edits, and more
+                </p>
+            </div>
+            
+            <!-- Input Section -->
+            <div class="input-section">
+                <h3><i class="fas fa-pencil-alt"></i> Your Text</h3>
+                <textarea id="aestheticInput" placeholder="Type your text here... e.g., soft aesthetic dreams and cottagecore vibes">soft aesthetic dreams and cottagecore vibes</textarea>
+                
+                <h3 style="margin-top: 30px;"><i class="fas fa-palette"></i> Choose Aesthetic Theme</h3>
+                <div class="theme-selector">
+                    <button class="theme-btn theme-vsco active" onclick="setTheme('vsco')">
+                        <i class="fas fa-sun"></i> VSCO
+                    </button>
+                    <button class="theme-btn theme-cottagecore" onclick="setTheme('cottagecore')">
+                        <i class="fas fa-leaf"></i> Cottagecore
+                    </button>
+                    <button class="theme-btn theme-vaporwave" onclick="setTheme('vaporwave')">
+                        <i class="fas fa-sunset"></i> Vaporwave
+                    </button>
+                    <button class="theme-btn theme-soft" onclick="setTheme('soft')">
+                        <i class="fas fa-cloud"></i> Soft Aesthetic
+                    </button>
+                    <button class="theme-btn theme-dark" onclick="setTheme('dark')">
+                        <i class="fas fa-book"></i> Dark Academia
+                    </button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-aesthetic btn-primary" onclick="generateAllStyles()">
+                        <i class="fas fa-magic"></i> Generate Aesthetic Text
+                    </button>
+                    <button class="btn-aesthetic btn-secondary" onclick="clearText()">
+                        <i class="fas fa-eraser"></i> Clear Text
+                    </button>
+                    <button class="btn-aesthetic btn-secondary" onclick="loadExamples()">
+                        <i class="fas fa-lightbulb"></i> Load Examples
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Aesthetic Styles Grid -->
+            <h2 style="color: #d87093; text-align: center; margin: 40px 0 20px 0;">
+                <i class="fas fa-star"></i> Aesthetic Text Styles
+            </h2>
+            
+            <div class="aesthetic-grid" id="aestheticGrid">
+                <!-- Styles will be generated here -->
+            </div>
+            
+            <!-- Social Media Preview -->
+            <div class="social-preview">
+                <div class="social-card instagram">
+                    <div class="social-icon" style="color: #E4405F;"><i class="fab fa-instagram"></i></div>
+                    <h3>Instagram Bio</h3>
+                    <p id="instagramPreview" style="font-size: 1.2rem; margin: 15px 0;">✨ 𝓼𝓸𝓯𝓽 𝓪𝓮𝓼𝓽𝓱𝓮𝓽𝓲𝓬 𝓭𝓻𝓮𝓪𝓶𝓼 ✨</p>
+                    <button class="copy-btn" onclick="copyText('instagramPreview')" style="background: #E4405F; color: white;">
+                        <i class="far fa-copy"></i> Copy for Instagram
+                    </button>
+                </div>
+                
+                <div class="social-card tiktok">
+                    <div class="social-icon" style="color: #000000;"><i class="fab fa-tiktok"></i></div>
+                    <h3>TikTok Caption</h3>
+                    <p id="tiktokPreview" style="font-size: 1.2rem; margin: 15px 0;">𝒸♡𝓉𝓉𝒶𝑔𝑒𝒸♡𝓇𝑒 𝓋𝒾𝒷𝑒𝓈 🌿</p>
+                    <button class="copy-btn" onclick="copyText('tiktokPreview')" style="background: #000000; color: white;">
+                        <i class="far fa-copy"></i> Copy for TikTok
+                    </button>
+                </div>
+                
+                <div class="social-card twitter">
+                    <div class="social-icon" style="color: #1DA1F2;"><i class="fab fa-twitter"></i></div>
+                    <h3>Twitter Bio</h3>
+                    <p id="twitterPreview" style="font-size: 1.2rem; margin: 15px 0;">s o f t . a e s t h e t i c . v i b e s ☁️</p>
+                    <button class="copy-btn" onclick="copyText('twitterPreview')" style="background: #1DA1F2; color: white;">
+                        <i class="far fa-copy"></i> Copy for Twitter
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Usage Tips -->
+            <div class="usage-tips">
+                <h3><i class="fas fa-lightbulb"></i> How to Use Aesthetic Text</h3>
+                <div class="tip-item">
+                    <div class="tip-icon">✨</div>
+                    <div>
+                        <strong>Instagram Bios:</strong> Use VSCO or Soft Aesthetic styles for a trendy bio that stands out
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-icon">🌸</div>
+                    <div>
+                        <strong>TikTok Captions:</strong> Cottagecore and Vaporwave styles work great for aesthetic video captions
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-icon">📱</div>
+                    <div>
+                        <strong>Social Media:</strong> Mix different styles for unique posts. Most platforms support these special characters
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Aesthetic Text Generator
+        let currentTheme = 'vsco';
+        
+        // Aesthetic styles database
+        const aestheticStyles = {
+            vsco: [
+                {
+                    name: "VSCO Soft",
+                    icon: "☀️",
+                    transform: (text) => text.toLowerCase().split('').map((char, i) => 
+                        i % 3 === 0 ? char.toUpperCase() : char
+                    ).join('').replace(/ /g, ' . ')
+                },
+                {
+                    name: "VSCO Dots",
+                    icon: "✨",
+                    transform: (text) => text.split('').map(char => 
+                        char === ' ' ? ' · ' : char
+                    ).join('')
+                },
+                {
+                    name: "VSCO Caps",
+                    icon: "🌟",
+                    transform: (text) => text.split(' ').map(word => 
+                        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                    ).join(' ')
+                }
+            ],
+            cottagecore: [
+                {
+                    name: "Cottagecore Script",
+                    icon: "🌿",
+                    transform: (text) => {
+                        const cursiveMap = {
+                            'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': '𝑒',
+                            'f': '𝒻', 'g': '𝑔', 'h': '𝒽', 'i': '𝒾', 'j': '𝒿',
+                            'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': '𝑜',
+                            'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉',
+                            'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎',
+                            'z': '𝓏', 'A': '𝒜', 'B': '𝐵', 'C': '𝒞', 'D': '𝒟',
+                            'E': '𝐸', 'F': '𝐹', 'G': '𝒢', 'H': '𝐻', 'I': '𝐼',
+                            'J': '𝒥', 'K': '𝒦', 'L': '𝐿', 'M': '𝑀', 'N': '𝒩',
+                            'O': '𝒪', 'P': '𝒫', 'Q': '𝒬', 'R': '𝑅', 'S': '𝒮',
+                            'T': '𝒯', 'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳',
+                            'Y': '𝒴', 'Z': '𝒵'
+                        };
+                        return text.split('').map(char => cursiveMap[char] || char).join('') + ' 🌿';
+                    }
+                },
+                {
+                    name: "Cottagecore Heart",
+                    icon: "♡",
+                    transform: (text) => text.replace(/o/gi, '♡').replace(/a/gi, '𝒶') + ' ♡'
+                },
+                {
+                    name: "Nature Text",
+                    icon: "🌸",
+                    transform: (text) => text.split(' ').join(' 🌸 ') + ' 🌸'
+                }
+            ],
+            vaporwave: [
+                {
+                    name: "Vaporwave Fullwidth",
+                    icon: "🛸",
+                    transform: (text) => {
+                        const fullwidthMap = {
+                            'a': 'ａ', 'b': 'ｂ', 'c': 'ｃ', 'd': 'ｄ', 'e': 'ｅ',
+                            'f': 'ｆ', 'g': 'ｇ', 'h': 'ｈ', 'i': 'ｉ', 'j': 'ｊ',
+                            'k': 'ｋ', 'l': 'ｌ', 'm': 'ｍ', 'n': 'ｎ', 'o': 'ｏ',
+                            'p': 'ｐ', 'q': 'ｑ', 'r': 'ｒ', 's': 'ｓ', 't': 'ｔ',
+                            'u': 'ｕ', 'v': 'ｖ', 'w': 'ｗ', 'x': 'ｘ', 'y': 'ｙ',
+                            'z': 'ｚ', 'A': 'Ａ', 'B': 'Ｂ', 'C': 'Ｃ', 'D': 'Ｄ',
+                            'E': 'Ｅ', 'F': 'Ｆ', 'G': 'Ｇ', 'H': 'Ｈ', 'I': 'Ｉ',
+                            'J': 'Ｊ', 'K': 'Ｋ', 'L': 'Ｌ', 'M': 'Ｍ', 'N': 'Ｎ',
+                            'O': 'Ｏ', 'P': 'Ｐ', 'Q': 'Ｑ', 'R': 'Ｒ', 'S': 'Ｓ',
+                            'T': 'Ｔ', 'U': 'Ｕ', 'V': 'Ｖ', 'W': 'Ｗ', 'X': 'Ｘ',
+                            'Y': 'Ｙ', 'Z': 'Ｚ', '0': '０', '1': '１', '2': '２',
+                            '3': '３', '4': '４', '5': '５', '6': '６', '7': '７',
+                            '8': '８', '9': '９', '!': '！', '?': '？', '.': '．',
+                            ',': '，'
+                        };
+                        return text.split('').map(char => fullwidthMap[char] || char).join('') + ' ◢◤';
+                    }
+                },
+                {
+                    name: "Retro Wave",
+                    icon: "🌌",
+                    transform: (text) => text.toUpperCase().split('').join(' ') + ' ░▒▓█'
+                },
+                {
+                    name: "Glitch Text",
+                    icon: "📺",
+                    transform: (text) => {
+                        const glitchChars = ['█', '░', '▒', '▓', '▄', '▀', '◙'];
+                        return text.split('').map((char, i) => 
+                            i % 4 === 0 && char !== ' ' ? glitchChars[Math.floor(Math.random() * glitchChars.length)] : char
+                        ).join('');
+                    }
+                }
+            ],
+            soft: [
+                {
+                    name: "Soft Spaced",
+                    icon: "☁️",
+                    transform: (text) => text.split('').join(' ') + ' ☁️'
+                },
+                {
+                    name: "Soft Lowercase",
+                    icon: "💮",
+                    transform: (text) => text.toLowerCase().replace(/ /g, ' . ') + ' .'
+                },
+                {
+                    name: "Bubble Soft",
+                    icon: "🫧",
+                    transform: (text) => {
+                        const bubbleMap = {
+                            'a': 'ⓐ', 'b': 'ⓑ', 'c': 'ⓒ', 'd': 'ⓓ', 'e': 'ⓔ',
+                            'f': 'ⓕ', 'g': 'ⓖ', 'h': 'ⓗ', 'i': 'ⓘ', 'j': 'ⓙ',
+                            'k': 'ⓚ', 'l': 'ⓛ', 'm': 'ⓜ', 'n': 'ⓝ', 'o': 'ⓞ',
+                            'p': 'ⓟ', 'q': 'ⓠ', 'r': 'ⓡ', 's': 'ⓢ', 't': 'ⓣ',
+                            'u': 'ⓤ', 'v': 'ⓥ', 'w': 'ⓦ', 'x': 'ⓧ', 'y': 'ⓨ',
+                            'z': 'ⓩ'
+                        };
+                        return text.toLowerCase().split('').map(char => bubbleMap[char] || char).join('') + ' 🩷';
+                    }
+                }
+            ],
+            dark: [
+                {
+                    name: "Dark Academia",
+                    icon: "📚",
+                    transform: (text) => {
+                        const gothicMap = {
+                            'a': '𝔞', 'b': '𝔟', 'c': '𝔠', 'd': '𝔡', 'e': '𝔢',
+                            'f': '𝔣', 'g': '𝔤', 'h': '𝔥', 'i': '𝔦', 'j': '𝔧',
+                            'k': '𝔨', 'l': '𝔩', 'm': '𝔪', 'n': '𝔫', 'o': '𝔬',
+                            'p': '𝔭', 'q': '𝔮', 'r': '𝔯', 's': '𝔰', 't': '𝔱',
+                            'u': '𝔲', 'v': '𝔳', 'w': '𝔴', 'x': '𝔵', 'y': '𝔶',
+                            'z': '𝔷', 'A': '𝔄', 'B': '𝔅', 'C': 'ℭ', 'D': '𝔇',
+                            'E': '𝔈', 'F': '𝔉', 'G': '𝔊', 'H': 'ℌ', 'I': 'ℑ',
+                            'J': '𝔍', 'K': '𝔎', 'L': '𝔏', 'M': '𝔐', 'N': '𝔑',
+                            'O': '𝔒', 'P': '𝔓', 'Q': '𝔔', 'R': 'ℜ', 'S': '𝔖',
+                            'T': '𝔗', 'U': '𝔘', 'V': '𝔙', 'W': '𝔚', 'X': '𝔛',
+                            'Y': '𝔜', 'Z': 'ℨ'
+                        };
+                        return text.split('').map(char => gothicMap[char] || char).join('') + ' 📜';
+                    }
+                },
+                {
+                    name: "Old Script",
+                    icon: "✒️",
+                    transform: (text) => text.toUpperCase().split('').join('.') + '.'
+                },
+                {
+                    name: "Mystery Text",
+                    icon: "🔮",
+                    transform: (text) => {
+                        const mysteryChars = ['†', '‡', '※', '§', '¶'];
+                        return text.split('').map((char, i) => 
+                            i % 3 === 0 && char !== ' ' ? mysteryChars[Math.floor(Math.random() * mysteryChars.length)] : char
+                        ).join('') + ' †';
+                    }
+                }
+            ]
+        };
+        
+        // Set theme
+        function setTheme(theme) {
+            currentTheme = theme;
+            
+            // Update active button
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Generate styles for new theme
+            generateAllStyles();
+        }
+        
+        // Generate all aesthetic styles
+        function generateAllStyles() {
+            const inputText = document.getElementById('aestheticInput').value || "aesthetic text";
+            const styles = aestheticStyles[currentTheme];
+            const grid = document.getElementById('aestheticGrid');
+            
+            grid.innerHTML = '';
+            
+            styles.forEach((style, index) => {
+                const transformedText = style.transform(inputText);
+                const styleId = `style${currentTheme}${index}`;
+                
+                const styleCard = document.createElement('div');
+                styleCard.className = `style-card ${currentTheme}`;
+                styleCard.innerHTML = `
+                    <div class="style-header">
+                        <div class="style-name">
+                            <span class="style-icon">${style.icon}</span>
+                            ${style.name}
+                        </div>
+                    </div>
+                    <div class="aesthetic-output" id="${styleId}">
+                        ${transformedText}
+                    </div>
+                    <button class="copy-btn" onclick="copyText('${styleId}')">
+                        <i class="far fa-copy"></i> Copy Style
+                    </button>
+                `;
+                
+                grid.appendChild(styleCard);
+            });
+            
+            // Update social media previews
+            updateSocialPreviews();
+        }
+        
+        // Update social media previews
+        function updateSocialPreviews() {
+            const text = document.getElementById('aestheticInput').value || "aesthetic text";
+            
+            // Instagram preview (VSCO style)
+            const instagramText = text.toLowerCase().split('').map((char, i) => 
+                i % 3 === 0 ? char.toUpperCase() : char
+            ).join('').replace(/ /g, ' ✨ ');
+            document.getElementById('instagramPreview').textContent = `✨ ${instagramText} ✨`;
+            
+            // TikTok preview (Cottagecore style)
+            const cursiveMap = {
+                'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': '𝑒',
+                'f': '𝒻', 'g': '𝑔', 'h': '𝒽', 'i': '𝒾', 'j': '𝒿',
+                'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': '♡',
+                'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉',
+                'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎',
+                'z': '𝓏'
+            };
+            const tiktokText = text.toLowerCase().split('').map(char => cursiveMap[char] || char).join('') + ' 🌿';
+            document.getElementById('tiktokPreview').textContent = tiktokText;
+            
+            // Twitter preview (Soft spaced)
+            const twitterText = text.split('').join(' ') + ' ☁️';
+            document.getElementById('twitterPreview').textContent = twitterText;
+        }
+        
+        // Copy text to clipboard
+        function copyText(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Show success feedback
+                const btn = event.target;
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.style.background = '#98fb98';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy. Please try again.');
+            });
+        }
+        
+        // Clear text
+        function clearText() {
+            document.getElementById('aestheticInput').value = '';
+            generateAllStyles();
+        }
+        
+        // Load examples
+        function loadExamples() {
+            const examples = [
+                "soft aesthetic dreams",
+                "cottagecore vibes only",
+                "vaporwave retro future",
+                "dark academia study",
+                "cozy autumn feelings"
+            ];
+            
+            const randomExample = examples[Math.floor(Math.random() * examples.length)];
+            document.getElementById('aestheticInput').value = randomExample;
+            generateAllStyles();
+        }
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('aestheticInput').addEventListener('input', generateAllStyles);
+            generateAllStyles();
+        });
+    </script>
+</body>
+</html>
